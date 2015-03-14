@@ -8,7 +8,7 @@ class Copyrighter
     protected $copyrightSymbol;
     protected $year;
 
-    public function __construct(CopyrightSymbol $copyrightSymbol, Currentyear $year)
+    public function __construct(CopyrightSymbol $copyrightSymbol, CurrentYear $year)
     {
         $this->copyrightSymbol = $copyrightSymbol;
         $this->year = $year;

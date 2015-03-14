@@ -1,6 +1,6 @@
 <?php namespace Copyrighter\Year;
 
-use Copyrighter\Year\Contracts\CurrentYearGeneratorInterface as CurrentYearGeneratorInterface;
+use Copyrighter\Year\Contracts\CurrentYearGeneratorInterface;
 
 class CurrentYear implements CurrentYearGeneratorInterface
 {

@@ -1,6 +1,5 @@
 <?php namespace Copyrighter\CopyrightSymbol;
 
-
 use Copyrighter\CopyrightSymbol\Contracts\CopyrightSymbolGeneratorInterface;
 
 class CopyrightSymbol implements CopyrightSymbolGeneratorInterface
