@@ -20,9 +20,7 @@ class Copyrighter
      */
     public function getCopyright()
     {
-        $copyrightSymbol = $this->copyrightSymbol->getCopyrightSymbol();
-        $currentYear = $this->year->getCurrentYear();
-        return $copyrightSymbol . ' ' . $currentYear;
+        return $this->copyrightSymbol . ' ' . $this->year;
     }
 
     /**
@@ -30,8 +28,11 @@ class Copyrighter
      */
     public static function show()
     {
-        $copyrighter = new static(new CopyrightSymbol, new CurrentYear);
-        echo $copyrighter->getCopyright();
+        echo (new static(new CopyrightSymbol, new CurrentYear));
     }
 
-} 
+    public function __toString()
+    {
+        return $this->getCopyright();
+    }
+}

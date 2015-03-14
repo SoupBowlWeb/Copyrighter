@@ -10,6 +10,11 @@ class CurrentYear implements CurrentYearGeneratorInterface
      */
     public function getCurrentYear()
     {
+        return (string) $this;
+    }
+
+    public function __toString()
+    {
         return date('Y');
     }
-} 
+}
