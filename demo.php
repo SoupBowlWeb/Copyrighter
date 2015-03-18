@@ -1,6 +1,6 @@
 <?php
 include 'vendor/autoload.php';
-use Copyrighter\Copyrighter as Copyrighter;
+use Copyrighter\Copyrighter;
 ?>
 <!doctype html>
 <html lang="en">

@@ -10,11 +10,11 @@ class CopyrightSymbol implements CopyrightSymbolGeneratorInterface
      */
     public function getCopyrightSymbol()
     {
-        return (string) $this;
+        return '&copy;';
     }
 
     public function __toString()
     {
-        return '&copy;';
+        return (string) $this->getCopyrightSymbol();
     }
 }

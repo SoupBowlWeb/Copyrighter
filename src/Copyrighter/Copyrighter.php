@@ -1,6 +1,8 @@
 <?php namespace Copyrighter;
 
+use Copyrighter\CopyrightSymbol\Contracts\CopyrightSymbolGeneratorInterface;
 use Copyrighter\CopyrightSymbol\CopyrightSymbol;
+use Copyrighter\Year\Contracts\CurrentYearGeneratorInterface;
 use Copyrighter\Year\CurrentYear;
 
 class Copyrighter
@@ -8,7 +10,7 @@ class Copyrighter
     protected $copyrightSymbol;
     protected $year;
 
-    public function __construct(CopyrightSymbol $copyrightSymbol, CurrentYear $year)
+    public function __construct(CopyrightSymbolGeneratorInterface $copyrightSymbol, CurrentYearGeneratorInterface $year)
     {
         $this->copyrightSymbol = $copyrightSymbol;
         $this->year = $year;
@@ -33,6 +35,6 @@ class Copyrighter
 
     public function __toString()
     {
-        return $this->getCopyright();
+        return (string)$this->getCopyright();
     }
 }
