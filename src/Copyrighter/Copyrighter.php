@@ -28,13 +28,41 @@ class Copyrighter
     /**
      * Show the copyright string
      */
-    public static function show()
+    public static function show($config = [])
     {
-        echo (new static(new CopyrightSymbol, new CurrentYear));
+        echo static::isValidConfig($config) ?
+            (new static(new CopyrightSymbol, new CurrentYear))->enableGeoAwareWith($config['geo-locator']) :
+            new static(new CopyrightSymbol, new CurrentYear);
+    }
+
+    /**
+     * Makes Copyrighter Geo Aware, returning the Year of remote user's timezone
+     * @param $geoLocatorName
+     */
+    public function enableGeoAwareWith($geoLocatorName)
+    {
+        // TODO: Throw a custom Exception
+        if(! $this->isValidGeoLocator($geoLocatorName))
+            return false;
+
+        $geoLocator = '\Copyrighter\GeoLocation\GeoLocators\\' . $geoLocatorName;
+        $this->year->setGeoLocator(new $geoLocator);
+        return $this;
     }
 
     public function __toString()
     {
         return (string)$this->getCopyright();
+    }
+
+    private function isValidGeoLocator($name)
+    {
+        $validGeoLocators = ['FreeGeoIP'];
+        return in_array($name, $validGeoLocators);
+    }
+
+    public static function isValidConfig(Array $config)
+    {
+        return array_key_exists('geo-locator', $config);
     }
 }

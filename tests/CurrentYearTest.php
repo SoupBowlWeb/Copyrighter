@@ -26,4 +26,13 @@ class CurrentYearTest extends PHPUnit_Framework_TestCase
         $echo = ob_get_clean();
         $this->assertEquals($currentYear->getCurrentYear(), $echo);
     }
+
+    public function test_geolocator_can_be_set()
+    {
+        $currentYear = new CurrentYear;
+        $this->assertNull($currentYear->getGeoLocator());
+        $geoLocator = new Copyrighter\GeoLocation\GeoLocators\FreeGeoIP();
+        $currentYear->setGeoLocator($geoLocator);
+        $this->assertInstanceOf('Copyrighter\GeoLocation\Contracts\GeoLocatorInterface', $currentYear->getGeoLocator());
+    }
 } 
