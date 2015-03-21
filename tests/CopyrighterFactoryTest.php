@@ -11,4 +11,10 @@ class CopyrighterFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Copyrighter\\Copyrighter', $copyrighter);
     }
 
+    public function test_it_throws_exception_for_bad_configuration()
+    {
+        $this->setExpectedException('Copyrighter\Exceptions\InvalidConfigurationException');
+        CopyrighterFactory::create([ 'foo' => 'bar' ]);
+    }
+
 } 

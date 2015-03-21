@@ -2,6 +2,8 @@
 
 use Copyrighter\CopyrightSymbol\Contracts\CopyrightSymbolGeneratorInterface;
 use Copyrighter\CopyrightSymbol\CopyrightSymbol;
+use Copyrighter\Exceptions\InvalidConfigurationException;
+use Copyrighter\Exceptions\InvalidGeoLocatorException;
 use Copyrighter\Year\Contracts\CurrentYearGeneratorInterface;
 use Copyrighter\Year\CurrentYear;
 
@@ -30,9 +32,16 @@ class Copyrighter
      */
     public static function show($config = [])
     {
-        echo static::isValidConfig($config) ?
-            (new static(new CopyrightSymbol, new CurrentYear))->enableGeoAwareWith($config['geo-locator']) :
-            new static(new CopyrightSymbol, new CurrentYear);
+        if(empty($config)) {
+            echo new static(new CopyrightSymbol, new CurrentYear);
+            return true;
+        }
+
+        if(! static::isValidConfig($config)) {
+            throw new InvalidConfigurationException('Invalid configuration.');
+        }
+
+        echo (new static(new CopyrightSymbol, new CurrentYear))->enableGeoAwareWith($config['geo-locator']);
     }
 
     /**
@@ -41,9 +50,9 @@ class Copyrighter
      */
     public function enableGeoAwareWith($geoLocatorName)
     {
-        // TODO: Throw a custom Exception
-        if(! $this->isValidGeoLocator($geoLocatorName))
-            return false;
+        if(! $this->isValidGeoLocator($geoLocatorName)) {
+            throw new InvalidGeoLocatorException('Supplied Geo Locator Not Supported. ("'.$geoLocatorName.'")');
+        }
 
         $geoLocator = '\Copyrighter\GeoLocation\GeoLocators\\' . $geoLocatorName;
         $this->year->setGeoLocator(new $geoLocator);

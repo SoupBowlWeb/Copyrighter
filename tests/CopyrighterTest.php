@@ -21,4 +21,17 @@ class CopyrighterTest extends PHPUnit_Framework_TestCase
         $echo = ob_get_clean();
         $this->assertEquals($copyrighter->getCopyright(), $echo);
     }
+
+    public function test_it_throws_exception_for_bad_configuration()
+    {
+        $this->setExpectedException('Copyrighter\Exceptions\InvalidConfigurationException');
+        Copyrighter::show([ 'foo' => 'bar' ]);
+    }
+
+    public function test_it_throws_exception_for_invalid_geolocator()
+    {
+        $copyrighter = \Copyrighter\CopyrighterFactory::create();
+        $this->setExpectedException('Copyrighter\Exceptions\InvalidGeoLocatorException');
+        $copyrighter->enableGeoAwareWith('FlimFlam');
+    }
 } 
