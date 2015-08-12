@@ -7,5 +7,4 @@ interface GeoLocatorInterface
      * @return mixed
      */
     public function getTimezone($ipAddress);
-
-} 
+}

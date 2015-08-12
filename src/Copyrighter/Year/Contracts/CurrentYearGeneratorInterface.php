@@ -7,4 +7,4 @@ interface CurrentYearGeneratorInterface
      * @return string
      */
     public function getCurrentYear();
-} 
+}
