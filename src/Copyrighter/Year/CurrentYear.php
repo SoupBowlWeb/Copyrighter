@@ -13,7 +13,7 @@ class CurrentYear implements CurrentYearGeneratorInterface
      */
     public function getCurrentYear()
     {
-        if(! $this->hasGeoLocator()) {
+        if (! $this->hasGeoLocator()) {
             return (new \DateTime)->format('Y');
         }
 

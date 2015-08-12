@@ -8,11 +8,11 @@ class CopyrighterFactory
 {
     public static function create($config = [])
     {
-        if(empty($config)) {
+        if (empty($config)) {
             return new Copyrighter(new CopyrightSymbol, new CurrentYear);
         }
 
-        if(! Copyrighter::isValidConfig($config)) {
+        if (! Copyrighter::isValidConfig($config)) {
             throw new InvalidConfigurationException('Invalid configuration.');
         }
 

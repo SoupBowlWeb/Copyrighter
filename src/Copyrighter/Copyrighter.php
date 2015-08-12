@@ -32,12 +32,12 @@ class Copyrighter
      */
     public static function show($config = [])
     {
-        if(empty($config)) {
+        if (empty($config)) {
             echo new static(new CopyrightSymbol, new CurrentYear);
             return true;
         }
 
-        if(! static::isValidConfig($config)) {
+        if (! static::isValidConfig($config)) {
             throw new InvalidConfigurationException('Invalid configuration.');
         }
 
@@ -50,7 +50,7 @@ class Copyrighter
      */
     public function enableGeoAwareWith($geoLocatorName)
     {
-        if(! $this->isValidGeoLocator($geoLocatorName)) {
+        if (! $this->isValidGeoLocator($geoLocatorName)) {
             throw new InvalidGeoLocatorException('Supplied Geo Locator Not Supported. ("'.$geoLocatorName.'")');
         }
 

@@ -15,6 +15,4 @@ class FreeGeoIP implements GeoLocatorInterface
         $response = file_get_contents($this->baseURL . $ipAddress);
         return json_decode($response)->time_zone;
     }
-
-
-} 
+}

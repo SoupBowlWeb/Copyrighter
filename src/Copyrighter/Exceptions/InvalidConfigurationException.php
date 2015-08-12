@@ -3,4 +3,4 @@
 class InvalidConfigurationException extends \Exception
 {
 
-} 
+}

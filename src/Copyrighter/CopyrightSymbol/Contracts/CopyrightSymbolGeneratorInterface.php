@@ -7,4 +7,4 @@ interface CopyrightSymbolGeneratorInterface
      * @return string
      */
     public function getCopyrightSymbol();
-} 
+}
