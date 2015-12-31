@@ -16,8 +16,8 @@ class CurrentYear implements CurrentYearGeneratorInterface
         if (! $this->hasGeoLocator()) {
             return (new \DateTime)->format('Y');
         }
+        $timezone = $this->geoLocator->getTimezone($this->getClientIp());
 
-        $timezone = $this->geoLocator->getTimezone();
         return (new \DateTime(null, new \DateTimeZone($timezone)))->format('Y');
     }
 
@@ -46,5 +46,26 @@ class CurrentYear implements CurrentYearGeneratorInterface
     private function hasGeoLocator()
     {
         return $this->geoLocator !== null;
+    }
+
+    private function getClientIp()
+    {
+        $ipAddress = null;
+
+        if (getenv('HTTP_CLIENT_IP')) {
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        } elseif(getenv('HTTP_X_FORWARDED_FOR')) {
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        } elseif(getenv('HTTP_X_FORWARDED')) {
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        } elseif(getenv('HTTP_FORWARDED_FOR')) {
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        } elseif(getenv('HTTP_FORWARDED')) {
+            $ipaddress = getenv('HTTP_FORWARDED');
+        } elseif(getenv('REMOTE_ADDR')) {
+            $ipaddress = getenv('REMOTE_ADDR');
+        }
+
+        return $ipaddress;
     }
 }

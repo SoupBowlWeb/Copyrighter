@@ -13,6 +13,7 @@ class FreeGeoIP implements GeoLocatorInterface
     public function getTimezone($ipAddress)
     {
         $response = file_get_contents($this->baseURL . $ipAddress);
-        return json_decode($response)->time_zone;
+
+        return json_decode($response)->time_zone ? : date_default_timezone_get();
     }
 }
