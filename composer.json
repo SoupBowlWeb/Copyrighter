@@ -8,7 +8,6 @@
     ],
     "description": "Copyrighter displays the copyright symbol and the current year on your PHP website.",
     "keywords": ["copyright", "year", "display"],
-    "version": "1.0.2",
     "license": "MIT",
     "require": {
 
